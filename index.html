@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opeoluwa Daniel Olaniyi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1a1a2e;
+      --mid:       #4a4a6a;
+      --subtle:    #8888aa;
+      --rule:      #e0e0ee;
+      --bg:        #fafafa;
+      --panel:     #f2f2f8;
+      --accent:    #2d6a4f;
+      --accent2:   #52b788;
+      --white:     #ffffff;
+      --mono:      'JetBrains Mono', monospace;
+      --serif:     'Lora', Georgia, serif;
+      --sans:      'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── LAYOUT ── */
+    .site-wrap {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--ink);
+      color: var(--white);
+      padding: 48px 28px 40px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      overflow-y: auto;
+    }
+
+    .avatar-ring {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--white);
+    }
+
+    .sidebar-title {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--accent2);
+      margin-top: 4px;
+    }
+
+    .sidebar-location {
+      font-size: 13px;
+      color: rgba(255,255,255,.55);
+      margin-top: 2px;
+    }
+
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar-links a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+      transition: color .2s;
+    }
+    .sidebar-links a:hover { color: var(--accent2); }
+    .sidebar-links a .icon {
+      width: 16px;
+      opacity: .7;
+      font-style: normal;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: auto;
+    }
+
+    .nav a {
+      color: rgba(255,255,255,.6);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      transition: color .2s;
+    }
+    .nav a:hover { color: var(--accent2); }
+
+    /* ── MAIN ── */
+    main { padding: 56px 64px 80px; max-width: 860px; }
+
+    section { margin-bottom: 56px; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ── ABOUT ── */
+    .about-lead {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .about-body { color: var(--mid); font-size: 15px; }
+    .about-body p + p { margin-top: 12px; }
+
+    /* ── SKILLS CHIPS ── */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .chip {
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-family: var(--mono);
+      color: var(--mid);
+    }
+    .chip.accent {
+      background: #eaf4ee;
+      border-color: #c3e0cc;
+      color: var(--accent);
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 28px; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0 24px;
+    }
+
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--subtle);
+      padding-top: 3px;
+      line-height: 1.5;
+    }
+
+    .exp-body {}
+
+    .exp-role {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .exp-org {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      color: var(--mid);
+      font-size: 13.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .exp-bullets li::before {
+      content: '→ ';
+      color: var(--accent2);
+      font-weight: 600;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-block {
+      background: var(--panel);
+      border-left: 3px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 6px 6px 0;
+    }
+    .edu-degree {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .edu-school { font-size: 13px; color: var(--accent); font-weight: 500; margin: 4px 0; }
+    .edu-detail { font-size: 13px; color: var(--mid); }
+    .edu-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 11px;
+      font-family: var(--mono);
+      padding: 3px 10px;
+      border-radius: 3px;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cert-card {
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 14px 16px;
+      background: var(--white);
+    }
+    .cert-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .cert-issuer { font-size: 12px; color: var(--subtle); margin-top: 2px; }
+
+    /* ── RESEARCH INTERESTS ── */
+    .interest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .interest-card {
+      background: var(--panel);
+      border-radius: 6px;
+      padding: 16px;
+      border-top: 2px solid var(--accent2);
+    }
+    .interest-title { font-weight: 600; font-size: 13.5px; color: var(--ink); }
+    .interest-desc { font-size: 12.5px; color: var(--mid); margin-top: 4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      font-size: 12px;
+      color: var(--subtle);
+      border-top: 1px solid var(--rule);
+      padding-top: 24px;
+      margin-top: 8px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .site-wrap { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; }
+      main { padding: 32px 24px 60px; }
+      .exp-item { grid-template-columns: 1fr; gap: 4px; }
+      .cert-grid, .interest-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="site-wrap">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar">
+    <div class="avatar-ring">OD</div>
+
+    <div>
+      <div class="sidebar-name">Opeoluwa Daniel Olaniyi</div>
+      <div class="sidebar-title">Data & Actuarial Analyst</div>
+      <div class="sidebar-location">📍 Lagos, Nigeria</div>
+    </div>
+
+    <div class="sidebar-links">
+      <a href="mailto:Olaniyiopeoluwa@gmail.com">
+        <span class="icon">✉</span> Olaniyiopeoluwa@gmail.com
+      </a>
+      <a href="tel:+2348109690858">
+        <span class="icon">☎</span> +234 810 969 0858
+      </a>
+      <a href="https://linkedin.com" target="_blank">
+        <span class="icon">in</span> LinkedIn
+      </a>
+    </div>
+
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#research">Research Interests</a>
+      <a href="#certifications">Certifications</a>
+    </nav>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <main>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-label">About</div>
+      <p class="about-lead">Turning data into decisions — from actuarial pricing models to analytics dashboards.</p>
+      <div class="about-body">
+        <p>I am a quantitative analyst with a BSc. in Mathematics (First Class Honours track, CGPA 3.91/5.0) from Ekiti State University, combining strong mathematical foundations with hands-on experience in data analysis, actuarial science, and computational research.</p>
+        <p>My work spans insurance pricing model development, portfolio monitoring, financial data reporting, and statistical research. I thrive at the intersection of rigorous quantitative methods and practical business insight — translating large, messy datasets into clear, actionable recommendations.</p>
+        <p>I am particularly interested in applying machine learning and AI to healthcare analytics, scientific computing, and decision-support systems.</p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-label">Work Experience</div>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-date">Nov 2025 –<br>May 2026</div>
+          <div class="exp-body">
+            <div class="exp-role">Data Analyst</div>
+            <div class="exp-org">Nextwave Consulting · Remote</div>
+            <ul class="exp-bullets">
+              <li>Analysed customer, operational, and financial datasets to identify trends and support business decisions.</li>
+              <li>Developed and maintained performance dashboards for portfolio and operational monitoring.</li>
+              <li>Conducted data cleaning, validation, and quality checks across reporting sources.</li>
+              <li>Translated analytical findings into structured recommendations for internal stakeholders.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-date">Oct 2024 –<br>Sep 2025</div>
+          <div class="exp-body">
+            <div class="exp-role">Actuarial Analyst</div>
+            <div class="exp-org">Integrated Trust & Investment Limited (ITI) · Lagos</div>
+            <ul class="exp-bullets">
+              <li>Assisted in developing and reviewing pricing models for insurance products using statistical methods.</li>
+              <li>Performed data preparation of insurance datasets for accuracy and consistency in reporting.</li>
+              <li>Supported portfolio monitoring — tracking exposure, claims performance, and profitability.</li>
+              <li>Prepared structured reports summarising risk findings for management decision-making.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-date">Jan 2021 –<br>Sep 2024</div>
+          <div class="exp-body">
+            <div class="exp-role">Computational Research Assistant (Part-Time)</div>
+            <div class="exp-org">FCT College of Education, Zuba · Abuja</div>
+            <ul class="exp-bullets">
+              <li>Supported computational and mathematical analysis of structured datasets for academic studies.</li>
+              <li>Developed and tested quantitative models to study system behaviour under varying conditions.</li>
+              <li>Used Python for analysis, simulation, and visualization of results.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-date">Nov 2019 –<br>Oct 2020</div>
+          <div class="exp-body">
+            <div class="exp-role">Science Tutor (NYSC)</div>
+            <div class="exp-org">Aragba Orogun Secondary School · Delta State</div>
+            <ul class="exp-bullets">
+              <li>Taught science subjects as part of the National Youth Service Corps.</li>
+              <li>Coordinated ICT activities and supported digital learning initiatives.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-label">Education</div>
+      <div class="edu-block">
+        <div class="edu-degree">BSc. Mathematics — Second Class Honours (Upper Division)</div>
+        <div class="edu-school">Ekiti State University, Ado-Ekiti · Sep 2014 – Sep 2019</div>
+        <div class="edu-detail">CGPA: 3.91 / 5.0 &nbsp;·&nbsp; Top 3 Best Graduating Student &nbsp;·&nbsp; Highest Graded Undergraduate Thesis</div>
+        <div class="edu-detail" style="margin-top:10px;">
+          <strong>Thesis:</strong> Comparison of the Efficiency of Modified Euler's Method and Runge-Kutta's Method in Solving Initial Value Problems — using MATLAB to evaluate accuracy, error behaviour, and convergence of numerical ODE solvers.
+        </div>
+        <span class="edu-badge">Top Graduating Thesis Award</span>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-label">Technical Skills</div>
+
+      <p style="font-size:13px;color:var(--mid);margin-bottom:12px;">Programming &amp; Tools</p>
+      <div class="chips">
+        <span class="chip accent">Python</span>
+        <span class="chip accent">SQL</span>
+        <span class="chip accent">MATLAB</span>
+        <span class="chip accent">R</span>
+        <span class="chip">Power BI</span>
+        <span class="chip">Tableau</span>
+        <span class="chip">Azure Data Factory</span>
+        <span class="chip">SSIS / SSAS / SSRS</span>
+        <span class="chip">Excel (Advanced)</span>
+        <span class="chip">Linux</span>
+      </div>
+
+      <p style="font-size:13px;color:var(--mid);margin:18px 0 12px;">Data Science &amp; Analytics</p>
+      <div class="chips">
+        <span class="chip">Machine Learning</span>
+        <span class="chip">Statistical Analysis</span>
+        <span class="chip">Predictive Modelling</span>
+        <span class="chip">Data Preprocessing</span>
+        <span class="chip">EDA</span>
+        <span class="chip">Model Evaluation</span>
+        <span class="chip">Data Visualisation</span>
+        <span class="chip">Numerical Methods</span>
+      </div>
+
+      <p style="font-size:13px;color:var(--mid);margin:18px 0 12px;">Mathematics &amp; Actuarial</p>
+      <div class="chips">
+        <span class="chip">Probability &amp; Statistics</span>
+        <span class="chip">Linear Algebra</span>
+        <span class="chip">Calculus</span>
+        <span class="chip">Actuarial Pricing Models</span>
+        <span class="chip">Risk Analysis</span>
+        <span class="chip">Mathematical Modelling</span>
+        <span class="chip">Optimisation</span>
+        <span class="chip">Error Analysis</span>
+      </div>
+    </section>
+
+    <!-- RESEARCH INTERESTS -->
+    <section id="research">
+      <div class="section-label">Research Interests</div>
+      <div class="interest-grid">
+        <div class="interest-card">
+          <div class="interest-title">Artificial Intelligence &amp; Machine Learning</div>
+          <div class="interest-desc">Deep learning architectures, model evaluation, and AI-driven decision support systems.</div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-title">Healthcare Analytics</div>
+          <div class="interest-desc">Medical image analysis, clinical data modelling, and health outcome prediction.</div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-title">Computational Mathematics</div>
+          <div class="interest-desc">Numerical methods, scientific computing, and optimisation techniques for real-world problems.</div>
+        </div>
+        <div class="interest-card">
+          <div class="interest-title">Applied Statistics &amp; Modelling</div>
+          <div class="interest-desc">Statistical inference, mathematical modelling, and actuarial applications of probability.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications">
+      <div class="section-label">Certifications</div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-name">Python for Data Analysis</div>
+          <div class="cert-issuer">Coursera · Dec 2025</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">Enhancing Communication with Remind</div>
+          <div class="cert-issuer">Coursera · Dec 2025</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">Teaching Secondary Mathematics</div>
+          <div class="cert-issuer">OpenLearn · Dec 2025</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">National Youth Service Corps (NYSC)</div>
+          <div class="cert-issuer">Federal Republic of Nigeria · Nov 2020</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Opeoluwa Daniel Olaniyi &nbsp;·&nbsp; Lagos, Nigeria &nbsp;·&nbsp; Olaniyiopeoluwa@gmail.com
+    </footer>
+
+  </main>
+</div>
+</body>
+</html>
